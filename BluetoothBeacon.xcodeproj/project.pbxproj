@@ -7,16 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D12EE6027EDF8E60087CD8B /* BeaconSignalLevel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D12EE5E27EDF8E60087CD8B /* BeaconSignalLevel+CoreDataClass.swift */; };
+		3D12EE6127EDF8E60087CD8B /* BeaconSignalLevel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D12EE5F27EDF8E60087CD8B /* BeaconSignalLevel+CoreDataProperties.swift */; };
+		3D77535227EBDF3500C52354 /* BeaconDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77535127EBDF3500C52354 /* BeaconDetector.swift */; };
+		3D77535427EBE1A700C52354 /* BeaconMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77535327EBE1A700C52354 /* BeaconMapView.swift */; };
+		3D77535727EC837F00C52354 /* BeaconSignalLevel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D77535527EC837E00C52354 /* BeaconSignalLevel.xcdatamodeld */; };
 		3D9FC0AB27E4944200C6CD1C /* BluetoothBeaconApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FC0AA27E4944200C6CD1C /* BluetoothBeaconApp.swift */; };
-		3D9FC0AD27E4944200C6CD1C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FC0AC27E4944200C6CD1C /* ContentView.swift */; };
+		3D9FC0AD27E4944200C6CD1C /* ProximityBigTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FC0AC27E4944200C6CD1C /* ProximityBigTextView.swift */; };
 		3D9FC0AF27E4944600C6CD1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9FC0AE27E4944600C6CD1C /* Assets.xcassets */; };
 		3D9FC0B227E4944600C6CD1C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9FC0B127E4944600C6CD1C /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D12EE5E27EDF8E60087CD8B /* BeaconSignalLevel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconSignalLevel+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		3D12EE5F27EDF8E60087CD8B /* BeaconSignalLevel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconSignalLevel+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		3D77535127EBDF3500C52354 /* BeaconDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconDetector.swift; sourceTree = "<group>"; };
+		3D77535327EBE1A700C52354 /* BeaconMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconMapView.swift; sourceTree = "<group>"; };
+		3D77535627EC837E00C52354 /* BeaconSignalLevel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeaconSignalLevel.xcdatamodel; sourceTree = "<group>"; };
 		3D9FC0A727E4944200C6CD1C /* BluetoothBeacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluetoothBeacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9FC0AA27E4944200C6CD1C /* BluetoothBeaconApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothBeaconApp.swift; sourceTree = "<group>"; };
-		3D9FC0AC27E4944200C6CD1C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3D9FC0AC27E4944200C6CD1C /* ProximityBigTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityBigTextView.swift; sourceTree = "<group>"; };
 		3D9FC0AE27E4944600C6CD1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D9FC0B127E4944600C6CD1C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,8 +61,13 @@
 		3D9FC0A927E4944200C6CD1C /* BluetoothBeacon */ = {
 			isa = PBXGroup;
 			children = (
+				3D12EE5E27EDF8E60087CD8B /* BeaconSignalLevel+CoreDataClass.swift */,
+				3D12EE5F27EDF8E60087CD8B /* BeaconSignalLevel+CoreDataProperties.swift */,
+				3D77535527EC837E00C52354 /* BeaconSignalLevel.xcdatamodeld */,
+				3D77535127EBDF3500C52354 /* BeaconDetector.swift */,
+				3D77535327EBE1A700C52354 /* BeaconMapView.swift */,
 				3D9FC0AA27E4944200C6CD1C /* BluetoothBeaconApp.swift */,
-				3D9FC0AC27E4944200C6CD1C /* ContentView.swift */,
+				3D9FC0AC27E4944200C6CD1C /* ProximityBigTextView.swift */,
 				3D9FC0AE27E4944600C6CD1C /* Assets.xcassets */,
 				3D9FC0B027E4944600C6CD1C /* Preview Content */,
 			);
@@ -137,8 +152,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D9FC0AD27E4944200C6CD1C /* ContentView.swift in Sources */,
+				3D12EE6027EDF8E60087CD8B /* BeaconSignalLevel+CoreDataClass.swift in Sources */,
+				3D9FC0AD27E4944200C6CD1C /* ProximityBigTextView.swift in Sources */,
+				3D12EE6127EDF8E60087CD8B /* BeaconSignalLevel+CoreDataProperties.swift in Sources */,
 				3D9FC0AB27E4944200C6CD1C /* BluetoothBeaconApp.swift in Sources */,
+				3D77535727EC837F00C52354 /* BeaconSignalLevel.xcdatamodeld in Sources */,
+				3D77535227EBDF3500C52354 /* BeaconDetector.swift in Sources */,
+				3D77535427EBE1A700C52354 /* BeaconMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,10 +290,14 @@
 				DEVELOPMENT_TEAM = KWH9SNLF77;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BluetoothBeacon/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To Scan for beacon in the background";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "For Scanning Beacon";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -300,10 +324,14 @@
 				DEVELOPMENT_TEAM = KWH9SNLF77;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BluetoothBeacon/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To Scan for beacon in the background";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "For Scanning Beacon";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -341,6 +369,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3D77535527EC837E00C52354 /* BeaconSignalLevel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3D77535627EC837E00C52354 /* BeaconSignalLevel.xcdatamodel */,
+			);
+			currentVersion = 3D77535627EC837E00C52354 /* BeaconSignalLevel.xcdatamodel */;
+			name = BeaconSignalLevel.xcdatamodeld;
+			path = ../BeaconSignalLevel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3D9FC09F27E4944200C6CD1C /* Project object */;
 }
