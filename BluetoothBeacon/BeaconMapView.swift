@@ -112,8 +112,10 @@ struct BeaconMapView: View {
                             showAlert = true
                         }.alert("Are you sure you want to clear all data point?", isPresented: $showAlert){
                             Button("Yes", role: .destructive) { beaconDetector.deleteRecords()}
-                        }.padding(.bottom, 5)
-                        Button("Export Data",action: shareButton).padding(.bottom, 1)
+                        }.padding(5)
+                        Divider()
+                        Button("Export Data",action: shareButton).padding(5)
+                            
                     }
                 }
             }
