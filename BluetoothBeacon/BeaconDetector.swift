@@ -11,15 +11,15 @@ import UserNotifications
 
 
 class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
-    var locationManager: CLLocationManager?
-    var center = UNUserNotificationCenter.current()
-    let container = NSPersistentContainer(name: "BeaconSignalLevel")
+    private var locationManager: CLLocationManager?
+    private var center = UNUserNotificationCenter.current()
+    private let container = NSPersistentContainer(name: "BeaconSignalLevel")
     private var count = 0
     
-    @Published var lastBeaconSignal: CLBeacon?
-    @Published var lastLocation: CLLocation?
-    @Published var lastDistance = CLProximity.unknown
-    @Published var beaconSignalLevels: [BeaconSignalLevel] = []
+    @Published private(set) var lastBeaconSignal: CLBeacon?
+    @Published private(set) var lastLocation: CLLocation?
+    @Published private(set) var lastDistance = CLProximity.unknown
+    @Published private(set) var beaconSignalLevels: [BeaconSignalLevel] = []
     
     
     
@@ -31,16 +31,7 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager?.requestAlwaysAuthorization()
         locationManager?.allowsBackgroundLocationUpdates = true
         
-        container.loadPersistentStores(){ description, error in
-            if let error = error {
-                print("error \(error)")
-            } else {
-                print("datastore loaded")
-                self.fetchBeaconSignalLevel()
-            }
-        }
-        
-        
+        initialiseDataStore()
         
         let content = UNMutableNotificationContent()
         content.title = "Beacon"
@@ -64,10 +55,37 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    func initialiseDataStore () {
+        container.loadPersistentStores(){ description, error in
+            if let error = error {
+                print("error \(error)")
+            } else {
+                print("datastore loaded")
+                self.fetchBeaconSignalLevel()
+            }
+        }
+    }
+    
     func fetchBeaconSignalLevel(){
         let request = NSFetchRequest<BeaconSignalLevel>(entityName: "BeaconSignalLevel")
         do {
-            beaconSignalLevels = try container.viewContext.fetch(request)
+            let fetchResult = try container.viewContext.fetch(request).sorted {
+                $0.timestamp! > $1.timestamp!
+            }
+            beaconSignalLevels = fetchResult
+            print("fetching")
+        } catch let error {
+            print("error fetching: \(error)")
+        }
+    }
+    
+    func deleteRecords(){
+        do {
+            for store in container.persistentStoreCoordinator.persistentStores {
+                try container.persistentStoreCoordinator.destroyPersistentStore(at: store.url!, ofType: store.type, options: nil)
+            }
+            beaconSignalLevels = []
+            initialiseDataStore()
         } catch let error {
             print("error fetching: \(error)")
         }
@@ -85,6 +103,7 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         do {
             try container.viewContext.save()
+            print("saving")
         } catch let error {
             print("error saving: \(error)")
         }
@@ -131,9 +150,10 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
                     saveBeaconSignalLevel(beacon: beacon, location: lastLocation)
                     count = count + 1
                 }
-                if count % 10 == 0 {
+                if count % 5 == 0 {
                     fetchBeaconSignalLevel()
                 }
+                
             }
         }
     }
