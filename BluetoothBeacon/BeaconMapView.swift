@@ -54,7 +54,7 @@ struct BeaconMapView: View {
     }
     
     var body: some View {
-        ZStack (alignment:.bottom) {
+        return ZStack (alignment:.bottom) {
             Map(coordinateRegion: $region,showsUserLocation: showCurrentLocation, userTrackingMode: $trackingMode, annotationItems: beaconDetector.beaconSignalLevels[0..<min(beaconDetector.beaconSignalLevels.count,75)]){ beaconLevel in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(beaconLevel.latitude), longitude: CLLocationDegrees(beaconLevel.longitude))) {
                         LazyView(Circle()
@@ -104,13 +104,13 @@ struct BeaconMapView: View {
                         .opacity(0.9)
                         .frame(width: nil, height: 100, alignment: .center)
                     VStack {
-                        Button("Clear Data") {
+                        Button("Clear Data",role: .destructive) {
                             showAlert = true
                         }.alert("Are you sure you want to clear all data point?", isPresented: $showAlert){
                             Button("Yes", role: .destructive) { beaconDetector.deleteRecords()}
-                        }.padding(5)
+                        }.padding(5).disabled(beaconDetector.beaconSignalLevels.count == 0)
                         Divider()
-                        Button("Export Data",action: shareButton).padding(5)
+                        Button("Export Data",action: shareButton).padding(5).disabled(beaconDetector.beaconSignalLevels.count == 0)
                             
                     }
                 }
@@ -120,6 +120,10 @@ struct BeaconMapView: View {
     }
     
     func shareButton() {
+        if beaconDetector.beaconSignalLevels.count == 0 {
+            return
+        }
+
         let fileName = "export.csv"
         let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
         var csvText = "timestamp,latitude,longitude,speed(mps),course(start_from_north_clockwise),proximity(m),beacon_accuracy(m),rssi\n"
