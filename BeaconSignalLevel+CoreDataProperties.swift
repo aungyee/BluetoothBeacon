@@ -2,7 +2,7 @@
 //  BeaconSignalLevel+CoreDataProperties.swift
 //  BluetoothBeacon
 //
-//  Created by Aung Yee on 25/03/2022.
+//  Created by Aung Yee on 30/03/2022.
 //
 //
 
@@ -21,9 +21,10 @@ extension BeaconSignalLevel {
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
     @NSManaged public var proximity: Int16
+    @NSManaged public var rssi: Int16
     @NSManaged public var speed: Double
     @NSManaged public var timestamp: Date?
-    @NSManaged public var rssi: Int16
+    @NSManaged public var coordinate_accuracy: Double
 
 }
 

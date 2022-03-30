@@ -126,10 +126,10 @@ struct BeaconMapView: View {
 
         let fileName = "export.csv"
         let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
-        var csvText = "timestamp,latitude,longitude,speed(mps),course(start_from_north_clockwise),proximity(m),beacon_accuracy(m),rssi\n"
+        var csvText = "timestamp,latitude,longitude,coordinate_accuracy(m),speed(mps),course(start_from_north_clockwise),proximity(m),beacon_accuracy(m),rssi\n"
 
         for beaconlevel in beaconDetector.beaconSignalLevels {
-        csvText += "\(beaconlevel.timestamp!),\(beaconlevel.latitude),\(beaconlevel.longitude),\(beaconlevel.speed),\(beaconlevel.course),\(beaconlevel.proximity),\(beaconlevel.beacon_accuracy),\(beaconlevel.rssi)\n"
+            csvText += "\(beaconlevel.timestamp!),\(beaconlevel.latitude),\(beaconlevel.longitude),\(beaconlevel.coordinate_accuracy),\(beaconlevel.speed),\(beaconlevel.course),\(beaconlevel.proximity),\(beaconlevel.beacon_accuracy),\(beaconlevel.rssi)\n"
         }
 
         do {

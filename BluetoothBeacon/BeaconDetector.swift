@@ -100,6 +100,7 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
         newBeaconSignalLevel.rssi = Int16(beacon.rssi)
         newBeaconSignalLevel.timestamp = beacon.timestamp
         newBeaconSignalLevel.speed = location.speed.magnitude
+        newBeaconSignalLevel.coordinate_accuracy = location.horizontalAccuracy.magnitude
         
         do {
             try container.viewContext.save()
