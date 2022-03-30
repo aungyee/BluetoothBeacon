@@ -150,7 +150,7 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
                     saveBeaconSignalLevel(beacon: beacon, location: lastLocation)
                     count = count + 1
                 }
-                if count % 5 == 0 {
+                if count % 1 == 0 {
                     fetchBeaconSignalLevel()
                 }
                 

@@ -21,10 +21,6 @@ struct BeaconMapView: View {
     
     @State var showCurrentLocation = true
     
-    @State var showShareSheet = false
-    
-    @State var isLoading = false
-    
     var accentColor: Color {
         if let beacon = beaconDetector.lastBeaconSignal {
             if beacon.rssi != 0 && beacon.rssi > -40 {
@@ -59,11 +55,11 @@ struct BeaconMapView: View {
     
     var body: some View {
         ZStack (alignment:.bottom) {
-            Map(coordinateRegion: $region,showsUserLocation: showCurrentLocation, userTrackingMode: $trackingMode, annotationItems: beaconDetector.beaconSignalLevels[0..<min(beaconDetector.beaconSignalLevels.count,50)]){ beaconLevel in
+            Map(coordinateRegion: $region,showsUserLocation: showCurrentLocation, userTrackingMode: $trackingMode, annotationItems: beaconDetector.beaconSignalLevels[0..<min(beaconDetector.beaconSignalLevels.count,75)]){ beaconLevel in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(beaconLevel.latitude), longitude: CLLocationDegrees(beaconLevel.longitude))) {
                         LazyView(Circle()
                             .fill(getColor(rssi: beaconLevel.rssi))
-                            .opacity(0.4)
+                            .opacity(0.6)
                             .frame(width: 14.0, height: 14.0)
                             .drawingGroup()
                         )
@@ -81,7 +77,6 @@ struct BeaconMapView: View {
                         .blur(radius: 0.5)
                     Toggle(isOn: $showCurrentLocation) {
                         Text("Show My Location")
-                            
                     }
                     .padding()
                 }
@@ -90,23 +85,24 @@ struct BeaconMapView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color(UIColor.systemBackground))
                         .opacity(0.7)
-                        .frame(width: nil, height: 120, alignment: .center)
+                        .frame(width: nil, height: 150, alignment: .center)
                         .blur(radius: 0.5)
                     VStack {
                         Text("Proximity: " + String(beaconDetector.lastDistance.rawValue) + "m")
-                            .padding(.bottom,1)
+                            .padding(5)
+                        Divider()
                         Text("Accuracy: " + String(beaconDetector.lastBeaconSignal?.accuracy.magnitude.rounded(.toNearestOrAwayFromZero) ?? 0.0) + "m")
-                            .padding(.bottom,1)
+                            .padding(5)
+                        Divider()
                         Text("RSSI: " + String(beaconDetector.lastBeaconSignal?.rssi ?? 0))
-                            .padding(.bottom,1)
+                            .padding(5)
                     }
                 }
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color(UIColor.systemBackground))
-                        .opacity(0.7)
+                        .opacity(0.9)
                         .frame(width: nil, height: 100, alignment: .center)
-                        .blur(radius: 0.5)
                     VStack {
                         Button("Clear Data") {
                             showAlert = true
@@ -126,7 +122,7 @@ struct BeaconMapView: View {
     func shareButton() {
         let fileName = "export.csv"
         let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
-        var csvText = "timestamp,latitude,longitude,speed,course,proximity(m),beacon_accuracy(m),rssi\n"
+        var csvText = "timestamp,latitude,longitude,speed(mps),course(start_from_north_clockwise),proximity(m),beacon_accuracy(m),rssi\n"
 
         for beaconlevel in beaconDetector.beaconSignalLevels {
         csvText += "\(beaconlevel.timestamp!),\(beaconlevel.latitude),\(beaconlevel.longitude),\(beaconlevel.speed),\(beaconlevel.course),\(beaconlevel.proximity),\(beaconlevel.beacon_accuracy),\(beaconlevel.rssi)\n"
@@ -144,11 +140,10 @@ struct BeaconMapView: View {
         filesToShare.append(path!)
 
         let av = UIActivityViewController(activityItems: filesToShare, applicationActivities: nil)
-
-        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
-
-        showShareSheet.toggle()
-        isLoading.toggle()
+        
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        windowScene?.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
         }
 }
 
